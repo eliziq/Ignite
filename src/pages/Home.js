@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import GameDetail from "../components/GameDetail";
+import { useLocation } from "react-router-dom";
 //Redux
 import { useDispatch, useSelector } from "react-redux";
 import { loadGames } from "../actions/gamesAction";
@@ -8,8 +8,14 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 //Components
 import Game from "../components/Game";
+import GameDetail from "../components/GameDetail";
 
 const Home = () => {
+	//get the current location
+	const location = useLocation();
+	//Разделяем ссылку на массив элементов между знаками "/", получаем доступ ко второму элементу (который id)
+	const pathId = location.pathname.split("/")[2];
+
 	//FETCH GAMES
 	const dispatch = useDispatch();
 	useEffect(() => {
@@ -19,7 +25,7 @@ const Home = () => {
 	const { newGames, popular, upcoming } = useSelector((state) => state.games);
 	return (
 		<GameList>
-			<GameDetail />
+			{pathId && <GameDetail />}
 			<h2>Upcoming Games</h2>
 			<Games>
 				{upcoming.map((game) => (
