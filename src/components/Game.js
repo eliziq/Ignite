@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 //Styling and animations
 import styled from "styled-components";
@@ -7,7 +6,10 @@ import { motion } from "framer-motion";
 //Redux
 import { useDispatch } from "react-redux";
 import { loadDetail } from "../actions/detailAction";
+import { smallImage } from "../util";
+
 const Game = ({ name, released, id, image }) => {
+	const stringPathId = id.toString();
 	//Load Detail Handler
 	const dispatch = useDispatch();
 	const loadDetailHandler = () => {
@@ -15,12 +17,16 @@ const Game = ({ name, released, id, image }) => {
 		dispatch(loadDetail(id));
 	};
 	return (
-		<StyledGame onClick={loadDetailHandler}>
+		<StyledGame layoutId={stringPathId} onClick={loadDetailHandler}>
 			<Link to={"/game/" + id}>
 				{/* {`/game/&{id}`} почему не работает?*/}
-				<h3>{name}</h3>
+				<motion.h3 layoutId={`title ${id}`}>{name}</motion.h3>
 				<p>{released}</p>
-				<img src={image} alt={name} />
+				<motion.img
+					layoutId={`image ${stringPathId}`}
+					src={smallImage(image, 640)}
+					alt={name}
+				/>
 			</Link>
 		</StyledGame>
 	);
