@@ -19,7 +19,7 @@ const Game = ({ name, released, id, image }) => {
 	return (
 		<StyledGame layoutId={stringPathId} onClick={loadDetailHandler}>
 			<Link to={"/game/" + id}>
-				{/* {`/game/&{id}`} почему не работает?*/}
+				{/* {`/game/${id}`} почему не работает?*/}
 				<motion.h3 layoutId={`title ${id}`}>{name}</motion.h3>
 				<p>{released}</p>
 				<motion.img

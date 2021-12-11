@@ -13,6 +13,9 @@ import nintendo from "../img/nintendo.svg";
 import xbox from "../img/xbox.svg";
 import steam from "../img/steam.svg";
 import apple from "../img/apple.svg";
+//stars
+
+import StarsRating from "stars-rating";
 
 const GameDetail = ({ pathId }) => {
 	const navigate = useNavigate();
@@ -25,6 +28,7 @@ const GameDetail = ({ pathId }) => {
 			navigate("/");
 		}
 	};
+
 	//Get Platform images
 	const getPlatform = (platform) => {
 		switch (platform) {
@@ -63,6 +67,14 @@ const GameDetail = ({ pathId }) => {
 							<div className="rating">
 								<motion.h3 layoutId={`title ${pathId}`}>{game.name}</motion.h3>
 								<p>Rating: {game.rating}</p>
+								<StarsRating
+									count={5}
+									size={24}
+									color2={"#ffd700"}
+									value={game.rating}
+									half="true"
+									edit="false"
+								/>
 							</div>
 							<Info>
 								<h3>Platforms</h3>
